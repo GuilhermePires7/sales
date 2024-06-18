@@ -1,0 +1,24 @@
+* {
+    font-family: 'Roboto';
+  }
+
+  header {
+    border-bottom: 1px solid #CCC;
+  }
+  form form-customers {
+    display: flex;
+    align-items: center;
+  }
+/*Create schedule*/
+#content-form {
+    width: 100%;
+    margin: 20px auto;
+
+}
+.form-control {
+    width: 50%;
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
