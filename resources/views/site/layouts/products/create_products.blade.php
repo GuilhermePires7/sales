@@ -1,7 +1,7 @@
 @extends('site.layouts.partials.basic')
-@section('title', 'Produtos')
+@section('title', 'Crie um produto')
 @section('content')
-<form action="" method="POST" enctype="multipart/form-data" id="form-customers">
+<form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data" id="form-customers">
     @csrf
     <div id="content-form">
         <div class="form-group">
@@ -13,8 +13,8 @@
             <input type="float" id="price" name="price" class="form-control" placeholder="Digite o preço do seu produto" value="{{ old('price') }}" required>
         </div>
         <div class="form-group">
-            <label for="description">Preço:</label>
-            <textarea name="description" class="form-control" required>{{ (old('description') != '') ? old('description') : 'Deixe sua observação:'}} </textarea>
+            <label for="description">Descrição:</label>
+            <textarea name="description" class="form-control" required>{{ (old('description') != '') ? old('description') : ''}} </textarea>
         </div>
     </div>
     <input type="submit" class="btn btn-primary" value="Cadastrar">

@@ -2,9 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\ProductsController;
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,13 +15,35 @@ use App\Http\Controllers\ProductsController;
 |
 */
 
-Route::get('/', [SaleController::class, 'sale'])->name('site.sale');
-Route::get('/customers', [SaleController::class, 'customers'])->name('site.customers');
-Route::post('/customers', [SaleController::class, 'customers_save'])->name('site.customers');
-Route::get('/products', [ProductsController::class, 'products'])->name('site.products');
-Route::post('/products', [ProductsController::class, 'products_save'])->name('site.products');
+//Rotas da página de vendas(sales)
+Route::get('/', [SaleController::class, 'index'])->name('sales.index');
+Route::get('/sales/create', [SaleController::class, 'create'])->name('sales.create');
+Route::post('/sales', [SaleController::class, 'store'])->name('sales.store');
+// Route::get('/sales/{id}/edit', SaleController::class, 'edit')->names('sales.edit');
+// Route::post('/sales/{id}', SaleController::class, 'update')->names('sales.update');
+// Route::delete('/sales/{id}', SaleController::class, 'destroy')->names('sales.destroy');
 
-Route::get('/get-data/{id}', [SaleController::class, 'sale'])->name('site.sales');
+
+//Rotas da página de Clientes(Customers)
+Route::get('/customers', [CustomersController::class, 'index'])->name('customers.index');
+Route::get('/customers/create', [CustomersController::class, 'create'])->name('customers.create');
+Route::post('/customers', [CustomersController::class, 'store'])->name('customers.store');
+
+//Rotas da página de Produtos(Produtcs)
+Route::get('/products', [ProductsController::class, 'index'])->name('products.index');
+Route::get('/products/create', [ProductsController::class, 'create'])->name('products.create');
+Route::post('/products', [ProductsController::class, 'store'])->name('products.store');
+
+
+//Rotas da página de Pagamentos(Payments)
+// Route::get('/products', ProductsController::class, 'index')->names('products.index');
+// Route::get('/products/create', ProductsController::class, 'create')->names('products.create');
+// Route::post('/products', ProductsController::class, 'store')->names('products.store');
+
+
+
+
+
 
 
 Route::middleware([

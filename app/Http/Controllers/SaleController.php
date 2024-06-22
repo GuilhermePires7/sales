@@ -4,37 +4,50 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Customer;
+use App\Models\Sales;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
-    public function sale(Request $request, $id = 0)
+    public function index()
     {
-        $sales = Customer::all();
+        $customers = Customer::all();
+        $products = Product::all();
+        $sales = Sales::all();
+        return view('site.layouts.sales.index')->with('customers', $customers)
+            ->with('products', $products)->with('sales', $sales);
+    }
+    public function create(Request $request)
+    {
+        $customers = Customer::all();
+        $products = Product::all();
+        return view('site.layouts.sales.create')->with('customers', $customers)
+            ->with('products', $products);
+    }
+    public function store(Request $request)
+    {
 
-        //dd($sales);
-        return view('site.sale', ['sales' => $sales]);
-        //return response()->json(['info' => $sales[$id] ?? 'Dados não encontrados']);
+        Sales::create($request->all());
+        return redirect('/');
+    }
+    public function update(Request $request, $id)
+    {
+        $sales = Sales::find($id);
+        $sales->update($request->all());
+
+        return redirect()->route('sales.index')->with('sucess', 'Post updated sucessfully');
     }
 
-
-
-    public function customers(Request $request)
+    public function destroy($id)
     {
-        $data = [];
-        return view('site.customers', ['data' => $data]);
+        $sale = Sales::find($id);
+        $sale->delete();
+
+        return redirect()->route('sales.index')->with('Sucess', 'Sale destroy with sucessfully');
     }
-
-    public function customers_save(Request $request)
+    public function edit($id)
     {
-        $customers = new Customer();
-        $customers->name = $request->name;
-        $customers->rg = $request->rg;
-        $customers->cpf = $request->cpf;
-
-
-        print_r($customers->getAttributes());
-        $customers->save();
-        return view('site.customers');
+        $sales = Sales::find($id);
+        return view('', compact('sales'));
     }
 }

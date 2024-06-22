@@ -8,9 +8,9 @@
                 </a>
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="{{ route('site.sale') }}" class="nav-link px-2 text-white">Nova venda</a></li>
-                <li><a href="{{ route('site.customers') }}" class="nav-link px-2 text-white">Clientes</a></li>
-                <li><a href="{{ route('site.products') }}" class="nav-link px-2 text-white">Produtos</a></li>
+                <li><a href="{{ route('sales.index') }}" class="nav-link px-2 text-white">Nova venda</a></li>
+                <li><a href="{{ route('customers.index') }}" class="nav-link px-2 text-white">Clientes</a></li>
+                <li><a href="{{ route('products.index') }}" class="nav-link px-2 text-white">Produtos</a></li>
 
                 </ul>
 

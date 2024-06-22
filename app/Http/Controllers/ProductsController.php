@@ -7,19 +7,17 @@ use \App\Models\Product;
 
 class ProductsController extends Controller
 {
-    public function products(Request $request)
+    public function index(Request $request)
     {
-
         $products = Product::all();
-        return view('site.products', ['products' => $products]);
+        return view('site.layouts.products.index', ['products' => $products]);
     }
-    public function products_save(Request $request)
+    public function create(Request $request)
     {
-        /*$request->validate([
-            'name' => 'required',
-            'rg' => 'required',
-            'cpf' => 'required'
-        ]);*/
+        return view('site.layouts.products.create_products');
+    }
+    public function store(Request $request)
+    {
         $products = new Product();
         $products->name = $request->name;
         $products->price = $request->price;
@@ -28,6 +26,6 @@ class ProductsController extends Controller
 
         print_r($products->getAttributes());
         $products->save();
-        return view('site.products');
+        return redirect()->route('/products');
     }
 }
