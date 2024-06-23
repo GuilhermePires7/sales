@@ -11,11 +11,8 @@ class SaleController extends Controller
 {
     public function index()
     {
-        $customers = Customer::all();
-        $products = Product::all();
-        $sales = Sales::all();
-        return view('site.layouts.sales.index')->with('customers', $customers)
-            ->with('products', $products)->with('sales', $sales);
+        $sales = Sales::with('customer', 'product')->get();
+        return view('site.layouts.sales.index')->with('sales', $sales);
     }
     public function create(Request $request)
     {
@@ -26,7 +23,6 @@ class SaleController extends Controller
     }
     public function store(Request $request)
     {
-
         Sales::create($request->all());
         return redirect('/');
     }
@@ -48,6 +44,7 @@ class SaleController extends Controller
     public function edit($id)
     {
         $sales = Sales::find($id);
-        return view('', compact('sales'));
+        dd($sales);
+        return view('site.layouts.sales.edit')->with('sales', $sales);
     }
 }

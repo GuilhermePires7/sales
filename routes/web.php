@@ -19,9 +19,9 @@ use App\Http\Controllers\ProductsController;
 Route::get('/', [SaleController::class, 'index'])->name('sales.index');
 Route::get('/sales/create', [SaleController::class, 'create'])->name('sales.create');
 Route::post('/sales', [SaleController::class, 'store'])->name('sales.store');
-// Route::get('/sales/{id}/edit', SaleController::class, 'edit')->names('sales.edit');
-// Route::post('/sales/{id}', SaleController::class, 'update')->names('sales.update');
-// Route::delete('/sales/{id}', SaleController::class, 'destroy')->names('sales.destroy');
+Route::get('/sales/edit/{id}', [SaleController::class, 'edit'])->name('sales.edit');
+Route::post('/sales/{id}', [SaleController::class, 'update'])->name('sales.update');
+Route::delete('/sales/{id}', [SaleController::class, 'destroy'])->name('sales.destroy');
 
 
 //Rotas da página de Clientes(Customers)

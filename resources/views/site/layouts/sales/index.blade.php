@@ -3,46 +3,50 @@
 @section('content')
 <h1>Sales index</h1>
 @if (count($sales) > 0)
-    <p>Tabela</p>
+<a href="{{ route('sales.create') }}"><p>Criar Nova Venda</p></a>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">NOME</th>
+        <th scope="col">PRODUTO</th>
+        <th scope="col">QUANTIDADE</th>
+        <th scope="col">PARCELAS</th>
+        <th scope="col">SUBTOTAL</th>
+      </tr>
+    </thead>
+    <tbody>
+        @foreach ($sales as $key => $sale)
+        <tr>
+            <th scope="row">{{ $sale->id }}</th>
+            <td>{{ $sale->customer->name }}</td>
+            <td>{{ $sale->product->name }}</td>
+            <td>{{ $sale->amount }}x</td>
+            <td>{{ $sale->installments }}</td>
+            <td>{{ $sale->subtotal }}</td>
+            <td>
+                <a href="{{ route('sales.edit', $sale->id) }}" class="btn btn-info edit-btn"><on-icon name='create-outline'>EDITAR</ion-icon> </a>
+                    <form action="{{ route('sales.destroy', $sale->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger delete-btn"><ion-icon name='trash-outline'></ion-icon>DELETAR</button>
+                    </form>
+            </td>
+          </tr>
+        @endforeach
+    </tbody>
+  </table>
 @else
 <a href="{{ route('sales.create') }}"><p>Criar nova venda</p></a>
+
 @endif
 
-{{-- <div class="container">
-    <h1 id="main-title">MINHA VENDAS</h1>
-    @if($sales->count() > 0)
-        <table class="table" id="contacts-table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome Do Cliente</th>
-                    <th scope="col">Produto Do Cliente</th>
-                    <th scope="col">Valor Do Produto</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($sales as $sale)
-                    <tr>
-                        <td scope="row" class="col-id">{{ $sale->id }}</td>
-                        <td scope="row">{{ $sale->name }}</td>
-                        <td scope="row">{{ $sale->phone }}</td>
-                        <td class="actions">
-                            <a href="{{ route('', $sale->id) }}"><i class="fas fa-eye check-icon"></i></a>
-                            <a href="{{ route('', $sale->id) }}"><i class="far fa-edit edit-icon"></i></a>
-                            <form class="delete-form" action="{{ route('contacts.destroy', $sale->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="delete-btn"><i class="fas fa-times delete-icon"></i></button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @else
-        <p id="empty-list-text">Ainda não há vendas,
-            <a href="{{ route('contacts.create') }}">Clique aqui para adicionar</a>
-        </p>
-    @endif
-    --}}
+{{-- <td>
+    <a href="{{ route('sales.edit', $customers->id) }}" class="btn btn-info edit-btn"><on-icon name='create-outline'></ion-icon> </a>
+        <form action="{{ route('sales.edit', $customers->id) }}">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger delete-btn"><ion-icon name='trash-outline'></ion-icon>Delete</button>
+        </form>
+</td>--}}
 @endsection

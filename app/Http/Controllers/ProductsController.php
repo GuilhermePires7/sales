@@ -24,8 +24,8 @@ class ProductsController extends Controller
         $products->description = $request->description;
 
 
-        print_r($products->getAttributes());
+        //print_r($products->getAttributes());
         $products->save();
-        return redirect()->route('/products');
+        return redirect('/products');
     }
 }
