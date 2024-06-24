@@ -9,16 +9,44 @@
     display: flex;
     align-items: center;
   }
-/*Create schedule*/
-#content-form {
+
+  .btn-new {
+        background-color: darkgreen;
+        width: 50px;
+        height: 50px;
+  }
+/*Create Sales*/
+#content-sales {
     width: 100%;
-    margin: 20px auto;
+}
+#content-table {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+}
+.button-and-table-container {
+    width: 70%;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1.5rem;
+}
+.title {
+    text-align: center;
+    padding: 10px 10px;
+    margin-bottom: 1rem;
+}
+.btn-primary {
+    width: 10rem;
+}
+.table {
+    width: 70%;
 
 }
 .form-control {
     width: 50%;
 }
-
 .mt-2 {
     margin-top: 2rem;
 }

@@ -43,8 +43,11 @@ class SaleController extends Controller
     }
     public function edit($id)
     {
-        $sales = Sales::find($id);
-        dd($sales);
-        return view('site.layouts.sales.edit')->with('sales', $sales);
+        $sales = Sales::with('customer', 'product')->find($id);
+        //dd($sale);
+        $customers = Customer::all();
+        $products = Product::all();
+        return view('site.layouts.sales.edit')->with('sales', $sales)->with('customers', $customers)
+            ->with('products', $products);
     }
 }

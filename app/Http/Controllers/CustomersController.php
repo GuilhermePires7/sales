@@ -29,4 +29,23 @@ class CustomersController extends Controller
         $customer->save();
         return redirect('/customers');
     }
+    public function edit($id)
+    {
+        $customer = Customer::find($id);
+        return view('site.layouts.customers.edit')->with('customer', $customer);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $customer = Customer::find($id);
+        $customer->update($request->all());
+        return redirect()->route('customers.index');
+    }
+    public function destroy($id)
+    {
+        $sale = Customer::find($id);
+        $sale->delete();
+        return redirect()->route('customers.index');
+    }
+
 }

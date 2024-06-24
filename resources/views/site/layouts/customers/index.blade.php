@@ -20,6 +20,18 @@
                 <td>{{ $customer->name }}</td>
                 <td>{{ $customer->cpf }}</td>
                 <td>{{ $customer->rg }}</td>
+                <td>
+                    <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-info edit-btn">
+                        <on-icon name='create-outline'>EDITAR</ion-icon>
+                    </a>
+                    <form action="{{ route('customers.destroy', $customer->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger delete-btn">
+                            <ion-icon name='trash-outline'></ion-icon>DELETAR
+                        </button>
+                    </form>
+                </td>
               </tr>
             @endforeach
         </tbody>

@@ -28,6 +28,9 @@ Route::delete('/sales/{id}', [SaleController::class, 'destroy'])->name('sales.de
 Route::get('/customers', [CustomersController::class, 'index'])->name('customers.index');
 Route::get('/customers/create', [CustomersController::class, 'create'])->name('customers.create');
 Route::post('/customers', [CustomersController::class, 'store'])->name('customers.store');
+Route::get('/customers/edit/{id}', [CustomersController::class, 'edit'])->name('customers.edit');
+Route::post('/customers/{id}', [CustomersController::class, 'update'])->name('customers.update');
+Route::delete('/customers/{id}', [CustomersController::class, 'destroy'])->name('customers.destroy');
 
 //Rotas da página de Produtos(Produtcs)
 Route::get('/products', [ProductsController::class, 'index'])->name('products.index');
