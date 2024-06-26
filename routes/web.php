@@ -36,18 +36,9 @@ Route::delete('/customers/{id}', [CustomersController::class, 'destroy'])->name(
 Route::get('/products', [ProductsController::class, 'index'])->name('products.index');
 Route::get('/products/create', [ProductsController::class, 'create'])->name('products.create');
 Route::post('/products', [ProductsController::class, 'store'])->name('products.store');
-
-
-//Rotas da página de Pagamentos(Payments)
-// Route::get('/products', ProductsController::class, 'index')->names('products.index');
-// Route::get('/products/create', ProductsController::class, 'create')->names('products.create');
-// Route::post('/products', ProductsController::class, 'store')->names('products.store');
-
-
-
-
-
-
+Route::get('/products/edit/{id}', [ProductsController::class, 'edit'])->name('products.edit');
+Route::post('/products/{id}', [ProductsController::class, 'update'])->name('products.update');
+Route::delete('/products/{id}', [ProductsController::class, 'destroy'])->name('products.destroy');
 
 Route::middleware([
     'auth:sanctum',

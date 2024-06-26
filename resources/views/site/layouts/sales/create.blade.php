@@ -2,7 +2,7 @@
 @section('title', 'Crie sua venda')
 @section('content')
 
-<form action="{{ route('sales.store') }}" method="POST">
+<form action="{{ route('sales.store') }}" method="POST" class="sales-form">
     @csrf
     <label for="customer_id">Cliente:</label>
     <select name="customer_id" id="customer_id">
@@ -24,10 +24,10 @@
     <input type="number" name="amount" id="amount" required>
 
     <label for="unitary_value">Valor Unitário:</label>
-    <input type="number" name="unitary_value" id="unitary_value" >
+    <input type="number" name="unitary_value" id="unitary_value" readonly>
 
     <label for="subtotal">Valor Total:</label>
-    <input type="number" name="subtotal" id="subtotal" >
+    <input type="number" name="subtotal" id="subtotal" readonly>
 
     <button type="button" id="openModal">Adicionar</button>
     <div id="replied" style="display: none">
@@ -37,6 +37,7 @@
 
 <!-- Modal -->
 <div id="paymentModal" style="display:none;">
+    <span class="close" id="closeModal">&times;</span>
     <h2>Detalhes do Pagamento</h2>
     <label for="payment_method">Método de Pagamento:</label>
     <select name="payment_method" id="payment_method">
@@ -62,22 +63,28 @@
 </div>
 
 <script>
-    document.getElementById('product_id').onchange=(event)=>{
+    document.getElementById('product_id').onchange = (event) => {
+    let selectedOption = event.target.options[event.target.selectedIndex];
 
-        let product = JSON.parse(event.target[event.target.value].dataset.product);
-        //let unitary_value = Number(document.getElementById('unitary_value').value) ;
+    if (selectedOption.value != "0") {
+        let product = JSON.parse(selectedOption.dataset.product);
         let subtotal = document.getElementById('subtotal');
-        let uni =document.getElementById('unitary_value');
+        let uni = document.getElementById('unitary_value');
         let amount = document.getElementById('amount');
 
         uni.value = product.price;
-        if(amount.value == '') {
+        if (amount.value == '') {
             amount.value = 1;
         }
 
-        subtotal.value = amount.value*product.price;
+        subtotal.value = amount.value * product.price;
+    } else {
+        document.getElementById('unitary_value').value = '';
+        document.getElementById('subtotal').value = '';
+        document.getElementById('amount').value = '';
+    }
+};
 
-    };
 
     document.getElementById('amount').addEventListener('input', subTotal);
 
@@ -110,6 +117,10 @@
         if(document.getElementById('installments').value == '') {
             document.getElementById('installments').value == 1;
         }
+        document.getElementById('closeModal').addEventListener('click', function() {
+             document.getElementById('paymentModal').style.display = 'none';
+});
+
 
     });
 

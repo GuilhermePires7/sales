@@ -28,4 +28,21 @@ class ProductsController extends Controller
         $products->save();
         return redirect('/products');
     }
+    public function edit($id)
+    {
+        $products = Product::find($id);
+        return view('site.layouts.products.edit')->with('products', $products);
+    }
+    public function update(Request $request, $id)
+    {
+        $products = Product::find($id);
+        $products->update($request->all());
+        return redirect()->route('products.index');
+    }
+    public function destroy($id)
+    {
+        $products = Product::find($id);
+        $products->delete();
+        return redirect()->route('products.index');
+    }
 }

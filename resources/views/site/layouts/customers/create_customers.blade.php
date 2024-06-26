@@ -1,7 +1,7 @@
 @extends('site.layouts.partials.basic')
 @section('title', 'Clientes')
 @section('content')
-<form action="{{ route('customers.update') }}" method="post" enctype="multipart/form-data" id="form-customers">
+<form action="{{ route('customers.store') }}" method="post" enctype="multipart/form-data" id="form-customers">
     @csrf
     <div id="content-form">
         <div class="form-group">

@@ -2,40 +2,46 @@
 @section('title', 'Clientes')
 @section('content')
 <div class="container">
+    <h1 class="title">CLIENTES</h1>
     @if (count($customers) > 0)
-    <a href="{{ route('customers.create') }}"><p>Criar Cliente</p></a>
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">NOME</th>
-            <th scope="col">CPF</th>
-            <th scope="col">RG</th>
-          </tr>
-        </thead>
-        <tbody>
-            @foreach ($customers as $key => $customer)
-            <tr>
-                <th scope="row">{{ $customer->id }}</th>
-                <td>{{ $customer->name }}</td>
-                <td>{{ $customer->cpf }}</td>
-                <td>{{ $customer->rg }}</td>
-                <td>
-                    <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-info edit-btn">
-                        <on-icon name='create-outline'>EDITAR</ion-icon>
-                    </a>
-                    <form action="{{ route('customers.destroy', $customer->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger delete-btn">
-                            <ion-icon name='trash-outline'></ion-icon>DELETAR
-                        </button>
-                    </form>
-                </td>
+    <div id="content-table">
+        <div class="button-and-table-container">
+            <a class="btn btn-primary" href="{{ route('customers.create') }}" role="button">Criar Novo Cliente</a>
+        </div>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">NOME</th>
+                <th scope="col">CPF</th>
+                <th scope="col">RG</th>
               </tr>
-            @endforeach
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+                @foreach ($customers as $key => $customer)
+                <tr>
+                    <th scope="row">{{ $customer->id }}</th>
+                    <td>{{ $customer->name }}</td>
+                    <td>{{ $customer->cpf }}</td>
+                    <td>{{ $customer->rg }}</td>
+                    <td>
+                        <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-info edit-btn">
+                            <on-icon name='create-outline'>EDITAR</ion-icon>
+                        </a>
+                        <form action="{{ route('customers.destroy', $customer->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger delete-btn">
+                                <ion-icon name='trash-outline'></ion-icon>DELETAR
+                            </button>
+                        </form>
+                    </td>
+                  </tr>
+                @endforeach
+            </tbody>
+          </table>
+    </div>
+
 @else
 <a href="{{ route('customers.create') }}"><p>Criar Cliente</p></a>
 @endif
